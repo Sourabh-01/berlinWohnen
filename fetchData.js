@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 
 const myHeaders = {
   "Content-Type": "application/x-www-form-urlencoded",
@@ -9,6 +10,7 @@ urlencoded.append("rooms_min", "3");
 urlencoded.append("q", "wf-save-srch");
 urlencoded.append("miete_max", "1700");
 urlencoded.append("wbs", "0");
+
 
 const requestOptions = {
   method: "POST",
