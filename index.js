@@ -4,7 +4,7 @@ import TelegramBot from "node-telegram-bot-api";
 import DBConnection from "./dbConnection.js";
 import RoomsModel from "./models/Rooms.js";
 import cron from "node-cron";
-import * as dotenv from 'dotenv'
+import * as dotenv from "dotenv";
 dotenv.config();
 
 function trimString(string) {
@@ -61,9 +61,17 @@ const Main = async () => {
         .attr("href");
     newRooms.push(apartment);
   });
-
-  await saveData(newRooms);
-  const messages = compareRooms(newRooms, availableRooms);
+  // await saveData(newRooms);
+  let check = [
+    {
+      rooms: "122",
+      totalArea: "79,27m²",
+      rent: "951,24€",
+      address: "Schwartzkopffstraße 26",
+      link: "https://inberlinwohnen.de/gpgf_W1150.22110.0074-0301.html",
+    },
+  ];
+  const messages = compareRooms(check, availableRooms);
 
   if (messages.length > 0) {
     for (let i = 0; i < messages.length; i++) {
@@ -102,8 +110,8 @@ const compareRooms = (roomA, roomB) => {
 
 // cron.schedule
 cron.schedule("* * * * *", function () {
-  Main();
-  console.log("Cron updated");
+Main();
+  console.log("Cron updated, Total users", users);
 });
 
 export default Main;
