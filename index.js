@@ -4,12 +4,14 @@ import TelegramBot from "node-telegram-bot-api";
 import DBConnection from "./dbConnection.js";
 import RoomsModel from "./models/Rooms.js";
 import cron from "node-cron";
+import * as dotenv from 'dotenv'
+dotenv.config();
 
 function trimString(string) {
   return String(string).replace("undefined", "").trimEnd();
 }
 let users = [];
-const token = "6016964652:AAHN9Dfmv9MXVKlgJ-hMZHYWsQ7WCmFB-qA";
+const token = process.env.API_TOKEN;
 const Bot = new TelegramBot(token, { polling: true });
 Bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
