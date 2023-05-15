@@ -1,11 +1,8 @@
-import axios from "axios";
 
-const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-myHeaders.append(
-  "Cookie",
-  "Cookie_1=value; PHPSESSID=452bd286332cc6ec88045bdcc7259b81"
-);
+const myHeaders = {
+  "Content-Type": "application/x-www-form-urlencoded",
+  "Cookie":"Cookie_1=value; PHPSESSID=452bd286332cc6ec88045bdcc7259b81"
+}
 
 const urlencoded = new URLSearchParams();
 urlencoded.append("rooms_min", "3");
