@@ -23,7 +23,6 @@ Bot.onText(/\/start/, (msg) => {
 });
 
 const Main = async () => {
-  // await DBConnection.connect();
   const response = await fetchData();
   const availableRooms = await getLatestRooms();
   const $ = cheerio.load(response?.searchresults);
@@ -61,52 +60,8 @@ const Main = async () => {
         .attr("href");
     newRooms.push(apartment);
   });
-  // await saveData(newRooms);
-  let check = [
-    {
-      rooms: "122",
-      totalArea: "79,27m²",
-      rent: "951,24€",
-      address: "Schwartzkopffstraße 26",
-      link: "https://inberlinwohnen.de/gpgf_W1150.22110.0074-0301.html",
-    },
-    {
-      rooms: '10000',
-      totalArea: '75,35m²',
-      rent: '904,20€',
-      address: 'Louis-Lewin-Str. 110',
-      link: 'https://inberlinwohnen.de/gpgf_MO::1001/5241/22.html'
-    },
-    {
-      rooms: '3',
-      totalArea: '75,35m²',
-      rent: '904,20€',
-      address: 'Louis-Lewin-Str. 110',
-      link: 'https://inberlinwohnen.de/gpgf_MO::1001/5241/22.html'
-    },
-    {
-      rooms: '4',
-      totalArea: '79,27m²',
-      rent: '951,24€',
-      address: 'Schwartzkopffstraße 26',
-      link: 'https://inberlinwohnen.de/gpgf_W1150.22110.0074-0301.html'
-    },
-    {
-      rooms: '3',
-      totalArea: '80,00m²',
-      rent: '912,00€',
-      address: 'Pablo-Picasso-Straße 35A, Lichtenberg',
-      link: 'https://inberlinwohnen.de/gpgf_ESQ::1771/14591/9994.html'
-    },
-    {
-      rooms: '4',
-      totalArea: '85,00m²',
-      rent: '1.071,00€',
-      address: 'Seehausener Straße 60, Lichtenberg',
-      link: 'https://inberlinwohnen.de/gpgf_ESQ::1771/14591/9992.html'
-    }
-  ];
-  const messages = compareRooms(check, availableRooms);
+  await saveData(newRooms);
+  const messages = compareRooms(newRooms, availableRooms);
 
   if (messages.length > 0) {
     for (let i = 0; i < messages.length; i++) {
