@@ -102,7 +102,7 @@ const compareRooms = (roomA, roomB) => {
 // cron.schedule
 cron.schedule("* * * * *", function () {
 Main();
-  console.log("Cron updated. Total users", users);
+  console.log("Cron updated. Total users available", users);
 });
 
 export default Main;
