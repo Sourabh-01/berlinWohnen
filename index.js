@@ -80,12 +80,13 @@ const sendMessage = (Bot, users, message) => {
 };
 
 const saveData = async (requestData) => {
-  const roomObject = new RoomsModel({ data: requestData });
-  await roomObject.save();
+  const roomObject = new RoomsModel({ data: requestData, addedOn: Date.now() });
+  const response = await roomObject.save();
+  console.log(response);
 };
 
 const getLatestRooms = async () => {
-  const list = await RoomsModel.find().sort({ addedOn: -1 }).limit(1);
+  const list = await RoomsModel.find().limit(1);
   return list[0].data;
 };
 
