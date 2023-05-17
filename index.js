@@ -5,11 +5,13 @@ import DBConnection from "./dbConnection.js";
 import RoomsModel from "./models/Rooms.js";
 import cron from "node-cron";
 import * as dotenv from "dotenv";
+import express from "express";
 dotenv.config();
 
 function trimString(string) {
   return String(string).replace("undefined", "").trimEnd();
 }
+const app = express();
 let users = [];
 const token = process.env.API_TOKEN;
 const Bot = new TelegramBot(token, { polling: true });
@@ -105,4 +107,10 @@ Main();
   console.log("Cron updated. Total users available", users);
 });
 
-export default Main;
+app.get("/", (req, res) => {
+  res.send("App is running, total users" + users);
+})
+
+app.listen(process.env.PORT, ()=> {
+  console.log("Server listening");
+})
